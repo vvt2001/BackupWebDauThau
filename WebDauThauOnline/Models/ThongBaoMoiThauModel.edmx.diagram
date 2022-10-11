@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="93411b61ff1343e6a600f94cb5242510" Name="Diagram1" ZoomLevel="72">
+      <Diagram DiagramId="93411b61ff1343e6a600f94cb5242510" Name="Diagram1" ZoomLevel="62">
         <EntityTypeShape EntityType="ThongBaoMoiThauModel.ThongBaoMoiThau_ThongTinChiTiet" Width="5.125" PointX="0.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>

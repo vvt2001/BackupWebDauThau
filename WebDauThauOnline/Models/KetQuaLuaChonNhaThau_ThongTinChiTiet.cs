@@ -45,8 +45,8 @@ namespace WebDauThauOnline.Models
         public string Hình_thức_hợp_đồng { get; set; }
         [DisplayName("Thời gian thực hiện HĐ (ngày)")]
         public Nullable<int> Thời_gian_thực_hiện_HĐ { get; set; }
-        [DisplayName("Văn bản phê duyệt")]
-        public string Văn_bản_phê_duyệt { get; set; }
+        [DisplayName("Số quyết định phê duyệt")]
+        public string Số_quyết_định_phê_duyệt { get; set; }
         [DisplayName("Ngày phê duyệt")]
         [DataType(DataType.DateTime)]
         public Nullable<System.DateTime> Ngày_phê_duyệt { get; set; }

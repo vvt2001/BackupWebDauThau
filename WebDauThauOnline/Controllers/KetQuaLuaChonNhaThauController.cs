@@ -196,6 +196,10 @@ namespace WebDauThauOnline.Controllers
                     {
                         break;
                     }
+                    else if (fileUpload.ContentLength > 2000000)
+                    {
+                        continue;
+                    }
                     else
                     {
                         //File upload
@@ -379,7 +383,15 @@ namespace WebDauThauOnline.Controllers
 
             foreach (HttpPostedFileBase fileUpload in ketQuaLuaChonNhaThauViewModel.EmpFileModel.fileUpload)
             {
-                if (fileUpload != null)
+                if (fileUpload == null)
+                {
+                    break;
+                }
+                else if (fileUpload.ContentLength > 2000000)
+                {
+                    continue;
+                }
+                else
                 {
                     //File upload
                     Models.File file = new Models.File();
@@ -471,6 +483,10 @@ namespace WebDauThauOnline.Controllers
             {
                 foreach (HttpPostedFileBase uploadItem in fileUpload)
                 {
+                    if (uploadItem.ContentLength > 2000000)
+                    {
+                        continue;
+                    }
 
                     //File upload
                     Models.File file = new Models.File();

@@ -88,12 +88,7 @@ namespace WebDauThauOnline.Controllers
                                                  ID = (int)e,
                                                  Name = e.ToDescriptionString()
                                              };
-            var Phát_hành_E_HSMT_EnumData = from Phát_hành_E_HSMT e in Enum.GetValues(typeof(Phát_hành_E_HSMT))
-                                            select new
-                                            {
-                                                ID = (int)e,
-                                                Name = e.ToDescriptionString()
-                                            };
+
             var Hình_thức_bảo_đảm_dự_thầu_EnumData = from Hình_thức_bảo_đảm_dự_thầu e in Enum.GetValues(typeof(Hình_thức_bảo_đảm_dự_thầu))
                                                      select new
                                                      {
@@ -107,7 +102,6 @@ namespace WebDauThauOnline.Controllers
             ViewBag.Hình_thức_lựa_chọn_nhà_thầu_EnumList = new SelectList(Hình_thức_lựa_chọn_nhà_thầu_EnumData, "ID", "Name");
             ViewBag.Phương_thức_LCNT_EnumList = new SelectList(Phương_thức_LCNT_EnumData, "ID", "Name");
             ViewBag.Hình_thức_dự_thầu_EnumList = new SelectList(Hình_thức_dự_thầu_EnumData, "ID", "Name");
-            ViewBag.Phát_hành_E_HSMT_EnumList = new SelectList(Phát_hành_E_HSMT_EnumData, "ID", "Name");
             ViewBag.Hình_thức_bảo_đảm_dự_thầu_EnumList = new SelectList(Hình_thức_bảo_đảm_dự_thầu_EnumData, "ID", "Name");
             return View();
         }
@@ -211,12 +205,6 @@ namespace WebDauThauOnline.Controllers
                                                  ID = (int)e,
                                                  Name = e.ToDescriptionString()
                                              };
-            var Phát_hành_E_HSMT_EnumData = from Phát_hành_E_HSMT e in Enum.GetValues(typeof(Phát_hành_E_HSMT))
-                                            select new
-                                            {
-                                                ID = (int)e,
-                                                Name = e.ToDescriptionString()
-                                            };
             var Hình_thức_bảo_đảm_dự_thầu_EnumData = from Hình_thức_bảo_đảm_dự_thầu e in Enum.GetValues(typeof(Hình_thức_bảo_đảm_dự_thầu))
                                                      select new
                                                      {
@@ -230,7 +218,6 @@ namespace WebDauThauOnline.Controllers
             ViewBag.Hình_thức_lựa_chọn_nhà_thầu_EnumList = new SelectList(Hình_thức_lựa_chọn_nhà_thầu_EnumData, "ID", "Name");
             ViewBag.Phương_thức_LCNT_EnumList = new SelectList(Phương_thức_LCNT_EnumData, "ID", "Name");
             ViewBag.Hình_thức_dự_thầu_EnumList = new SelectList(Hình_thức_dự_thầu_EnumData, "ID", "Name");
-            ViewBag.Phát_hành_E_HSMT_EnumList = new SelectList(Phát_hành_E_HSMT_EnumData, "ID", "Name");
             ViewBag.Hình_thức_bảo_đảm_dự_thầu_EnumList = new SelectList(Hình_thức_bảo_đảm_dự_thầu_EnumData, "ID", "Name");
 
             ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Hình_thức_thông_báo = "Đăng lần đầu";
@@ -241,7 +228,7 @@ namespace WebDauThauOnline.Controllers
             ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Hình_thức_lựa_chọn_nhà_thầu = ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Hình_thức_lựa_chọn_nhà_thầu_EnumValue.ToDescriptionString();
             ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Phương_thức_LCNT = ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Phương_thức_LCNT_EnumValue.ToDescriptionString();
             ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Hình_thức_dự_thầu = ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Hình_thức_dự_thầu_EnumValue.ToDescriptionString();
-            ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Phát_hành_E_HSMT = ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Phát_hành_E_HSMT_EnumValue.ToDescriptionString();
+            ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Chi_phí_E_HSMT = ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Chi_phí_E_HSMT;
             ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Hình_thức_bảo_đảm_dự_thầu = ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Hình_thức_bảo_đảm_dự_thầu_EnumValue.ToDescriptionString();
             ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Thời_điểm_đăng_tải = DateTime.Now;
             ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Số_TBMT = CreateID(ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.ID);
@@ -283,6 +270,10 @@ namespace WebDauThauOnline.Controllers
                     if (fileUpload == null)
                     {
                         break;
+                    }
+                    else if(fileUpload.ContentLength > 2000000)
+                    {
+                        continue;
                     }
                     else
                     {
@@ -376,7 +367,6 @@ namespace WebDauThauOnline.Controllers
             thongBaoMoiThauViewModel.ThongBaoMoiThauModel.Hình_thức_lựa_chọn_nhà_thầu_EnumValue = EnumExtension.GetValueFromDescription<Hình_thức_lựa_chọn_nhà_thầu>(thongBaoMoiThau_ThongTinChiTiet.Hình_thức_lựa_chọn_nhà_thầu);
             thongBaoMoiThauViewModel.ThongBaoMoiThauModel.Phương_thức_LCNT_EnumValue = EnumExtension.GetValueFromDescription<Phương_thức_LCNT>(thongBaoMoiThau_ThongTinChiTiet.Phương_thức_LCNT); 
             thongBaoMoiThauViewModel.ThongBaoMoiThauModel.Hình_thức_dự_thầu_EnumValue = EnumExtension.GetValueFromDescription<Hình_thức_dự_thầu>(thongBaoMoiThau_ThongTinChiTiet.Hình_thức_dự_thầu);
-            thongBaoMoiThauViewModel.ThongBaoMoiThauModel.Phát_hành_E_HSMT_EnumValue = EnumExtension.GetValueFromDescription<Phát_hành_E_HSMT>(thongBaoMoiThau_ThongTinChiTiet.Phát_hành_E_HSMT); 
             thongBaoMoiThauViewModel.ThongBaoMoiThauModel.Hình_thức_bảo_đảm_dự_thầu_EnumValue = EnumExtension.GetValueFromDescription<Hình_thức_bảo_đảm_dự_thầu>(thongBaoMoiThau_ThongTinChiTiet.Hình_thức_bảo_đảm_dự_thầu);
 
             var Loại_thông_báo_EnumData = from Loại_thông_báo e in Enum.GetValues(typeof(Loại_thông_báo))
@@ -421,12 +411,7 @@ namespace WebDauThauOnline.Controllers
                                                  ID = (int)e,
                                                  Name = e.ToDescriptionString()
                                              };
-            var Phát_hành_E_HSMT_EnumData = from Phát_hành_E_HSMT e in Enum.GetValues(typeof(Phát_hành_E_HSMT))
-                                            select new
-                                            {
-                                                ID = (int)e,
-                                                Name = e.ToDescriptionString()
-                                            };
+
             var Hình_thức_bảo_đảm_dự_thầu_EnumData = from Hình_thức_bảo_đảm_dự_thầu e in Enum.GetValues(typeof(Hình_thức_bảo_đảm_dự_thầu))
                                                      select new
                                                      {
@@ -440,7 +425,6 @@ namespace WebDauThauOnline.Controllers
             ViewBag.Hình_thức_lựa_chọn_nhà_thầu_EnumList = new SelectList(Hình_thức_lựa_chọn_nhà_thầu_EnumData, "ID", "Name");
             ViewBag.Phương_thức_LCNT_EnumList = new SelectList(Phương_thức_LCNT_EnumData, "ID", "Name");
             ViewBag.Hình_thức_dự_thầu_EnumList = new SelectList(Hình_thức_dự_thầu_EnumData, "ID", "Name");
-            ViewBag.Phát_hành_E_HSMT_EnumList = new SelectList(Phát_hành_E_HSMT_EnumData, "ID", "Name");
             ViewBag.Hình_thức_bảo_đảm_dự_thầu_EnumList = new SelectList(Hình_thức_bảo_đảm_dự_thầu_EnumData, "ID", "Name");
 
             ViewBag.GoiThauID = thongBaoMoiThauViewModel.ThongBaoMoiThauModel.ID;
@@ -505,12 +489,7 @@ namespace WebDauThauOnline.Controllers
                                                  ID = (int)e,
                                                  Name = e.ToDescriptionString()
                                              };
-            var Phát_hành_E_HSMT_EnumData = from Phát_hành_E_HSMT e in Enum.GetValues(typeof(Phát_hành_E_HSMT))
-                                            select new
-                                            {
-                                                ID = (int)e,
-                                                Name = e.ToDescriptionString()
-                                            };
+
             var Hình_thức_bảo_đảm_dự_thầu_EnumData = from Hình_thức_bảo_đảm_dự_thầu e in Enum.GetValues(typeof(Hình_thức_bảo_đảm_dự_thầu))
                                                      select new
                                                      {
@@ -524,7 +503,6 @@ namespace WebDauThauOnline.Controllers
             ViewBag.Hình_thức_lựa_chọn_nhà_thầu_EnumList = new SelectList(Hình_thức_lựa_chọn_nhà_thầu_EnumData, "ID", "Name");
             ViewBag.Phương_thức_LCNT_EnumList = new SelectList(Phương_thức_LCNT_EnumData, "ID", "Name");
             ViewBag.Hình_thức_dự_thầu_EnumList = new SelectList(Hình_thức_dự_thầu_EnumData, "ID", "Name");
-            ViewBag.Phát_hành_E_HSMT_EnumList = new SelectList(Phát_hành_E_HSMT_EnumData, "ID", "Name");
             ViewBag.Hình_thức_bảo_đảm_dự_thầu_EnumList = new SelectList(Hình_thức_bảo_đảm_dự_thầu_EnumData, "ID", "Name");
 
             ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Hình_thức_thông_báo = "Thay đổi";
@@ -535,7 +513,7 @@ namespace WebDauThauOnline.Controllers
             ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Hình_thức_lựa_chọn_nhà_thầu = ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Hình_thức_lựa_chọn_nhà_thầu_EnumValue.ToDescriptionString();
             ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Phương_thức_LCNT = ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Phương_thức_LCNT_EnumValue.ToDescriptionString();
             ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Hình_thức_dự_thầu = ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Hình_thức_dự_thầu_EnumValue.ToDescriptionString();
-            ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Phát_hành_E_HSMT = ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Phát_hành_E_HSMT_EnumValue.ToDescriptionString();
+            ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Chi_phí_E_HSMT = ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Chi_phí_E_HSMT;
             ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Hình_thức_bảo_đảm_dự_thầu = ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Hình_thức_bảo_đảm_dự_thầu_EnumValue.ToDescriptionString();
             ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Thời_điểm_đăng_tải = DateTime.Now;
             ThongBaoMoiThauViewModel.ThongBaoMoiThauModel.Lần_chỉnh_sửa += 1;
@@ -558,6 +536,10 @@ namespace WebDauThauOnline.Controllers
                     if (fileUpload == null)
                     {
                         break;
+                    }
+                    else if (fileUpload.ContentLength > 2000000)
+                    {
+                        continue;
                     }
                     else
                     {
@@ -649,7 +631,10 @@ namespace WebDauThauOnline.Controllers
             {
                 foreach (HttpPostedFileBase uploadItem in fileUpload)
                 {
-
+                    if (uploadItem.ContentLength > 2000000)
+                    {
+                        continue;
+                    }
                     //File upload
                     Models.File file = new Models.File();
 
@@ -834,12 +819,7 @@ namespace WebDauThauOnline.Controllers
                                                  ID = (int)e,
                                                  Name = e.ToDescriptionString()
                                              };
-            var Phát_hành_E_HSMT_EnumData = from Phát_hành_E_HSMT e in Enum.GetValues(typeof(Phát_hành_E_HSMT))
-                                            select new
-                                            {
-                                                ID = (int)e,
-                                                Name = e.ToDescriptionString()
-                                            };
+
             var Hình_thức_bảo_đảm_dự_thầu_EnumData = from Hình_thức_bảo_đảm_dự_thầu e in Enum.GetValues(typeof(Hình_thức_bảo_đảm_dự_thầu))
                                                      select new
                                                      {
@@ -853,7 +833,6 @@ namespace WebDauThauOnline.Controllers
             ViewBag.Hình_thức_lựa_chọn_nhà_thầu_EnumList = new SelectList(Hình_thức_lựa_chọn_nhà_thầu_EnumData, "ID", "Name");
             ViewBag.Phương_thức_LCNT_EnumList = new SelectList(Phương_thức_LCNT_EnumData, "ID", "Name");
             ViewBag.Hình_thức_dự_thầu_EnumList = new SelectList(Hình_thức_dự_thầu_EnumData, "ID", "Name");
-            ViewBag.Phát_hành_E_HSMT_EnumList = new SelectList(Phát_hành_E_HSMT_EnumData, "ID", "Name");
             ViewBag.Hình_thức_bảo_đảm_dự_thầu_EnumList = new SelectList(Hình_thức_bảo_đảm_dự_thầu_EnumData, "ID", "Name");
 
             Models.File file = db2.Files.Find(id);

@@ -15,7 +15,6 @@
           <Property Name="Số TBMT" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Số hiệu KHLCNT" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Thời điểm đăng tải" Type="datetime2" Precision="0" />
-          <Property Name="Tên KHLCNT" Type="nvarchar(max)" />
           <Property Name="Lĩnh vực" Type="nvarchar" MaxLength="20" />
           <Property Name="Bên mời thầu" Type="nvarchar(max)" />
           <Property Name="Tên gói thầu" Type="nvarchar(max)" Nullable="false" />
@@ -27,9 +26,7 @@
           <Property Name="Phương thức LCNT" Type="nvarchar" MaxLength="30" />
           <Property Name="Thời gian thực hiện hợp đồng" Type="int" />
           <Property Name="Hình thức dự thầu" Type="nvarchar" MaxLength="20" />
-          <Property Name="Thời gian nhận E-HSDT từ ngày" Type="datetime2" Precision="0" />
-          <Property Name="Thời gian nhận E-HSDT đến ngày" Type="datetime2" Precision="0" />
-          <Property Name="Phát hành E-HSMT" Type="nvarchar" MaxLength="20" />
+          <Property Name="Chi phí E-HSMT" Type="bigint" />
           <Property Name="Thời gian hiệu lực của E-HSDT" Type="int" />
           <Property Name="Địa điểm nhận HSDT" Type="nvarchar(max)" />
           <Property Name="Địa điểm thực hiện gói thầu" Type="nvarchar(max)" />
@@ -38,9 +35,8 @@
           <Property Name="Dự toán gói thầu" Type="bigint" />
           <Property Name="Số tiền bảo đảm dự thầu" Type="bigint" />
           <Property Name="Hình thức bảo đảm dự thầu" Type="nvarchar" MaxLength="20" />
-          <Property Name="Làm rõ E-HSMT" Type="nvarchar" MaxLength="50" />
           <Property Name="Lần chỉnh sửa" Type="int" Nullable="false" />
-          <Property Name="AccountID" Type="bigint" />
+          <Property Name="AccountID" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityContainer Name="ThongBaoMoiThauModelStoreContainer">
           <EntitySet Name="ThongBaoMoiThau_ThongTinChiTiet" EntityType="Self.ThongBaoMoiThau_ThongTinChiTiet" Schema="dbo" store:Type="Tables" />
@@ -59,7 +55,6 @@
           <Property Name="Số_TBMT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Số_hiệu_KHLCNT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Thời_điểm_đăng_tải" Type="DateTime" Precision="0" />
-          <Property Name="Tên_KHLCNT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Lĩnh_vực" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Bên_mời_thầu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Tên_gói_thầu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
@@ -71,9 +66,6 @@
           <Property Name="Phương_thức_LCNT" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Thời_gian_thực_hiện_hợp_đồng" Type="Int32" />
           <Property Name="Hình_thức_dự_thầu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Thời_gian_nhận_E_HSDT_từ_ngày" Type="DateTime" Precision="0" />
-          <Property Name="Thời_gian_nhận_E_HSDT_đến_ngày" Type="DateTime" Precision="0" />
-          <Property Name="Phát_hành_E_HSMT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Thời_gian_hiệu_lực_của_E_HSDT" Type="Int32" />
           <Property Name="Địa_điểm_nhận_HSDT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Địa_điểm_thực_hiện_gói_thầu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -82,9 +74,9 @@
           <Property Name="Dự_toán_gói_thầu" Type="Int64" />
           <Property Name="Số_tiền_bảo_đảm_dự_thầu" Type="Int64" />
           <Property Name="Hình_thức_bảo_đảm_dự_thầu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Làm_rõ_E_HSMT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Lần_chỉnh_sửa" Type="Int32" Nullable="false" />
-          <Property Name="AccountID" Type="Int64" />
+          <Property Name="AccountID" Type="Int64" Nullable="false" />
+          <Property Name="Chi_phí_E_HSMT" Type="Int64" />
         </EntityType>
         <EntityContainer Name="ThongBaoMoiThauEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ThongBaoMoiThau_ThongTinChiTiet" EntityType="Self.ThongBaoMoiThau_ThongTinChiTiet" />
@@ -98,6 +90,7 @@
           <EntitySetMapping Name="ThongBaoMoiThau_ThongTinChiTiet">
             <EntityTypeMapping TypeName="ThongBaoMoiThauModel.ThongBaoMoiThau_ThongTinChiTiet">
               <MappingFragment StoreEntitySet="ThongBaoMoiThau_ThongTinChiTiet">
+                <ScalarProperty Name="Chi_phí_E_HSMT" ColumnName="Chi phí E-HSMT" />
                 <ScalarProperty Name="AccountID" ColumnName="AccountID" />
                 <ScalarProperty Name="Lần_chỉnh_sửa" ColumnName="Lần chỉnh sửa" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -106,7 +99,6 @@
                 <ScalarProperty Name="Số_TBMT" ColumnName="Số TBMT" />
                 <ScalarProperty Name="Số_hiệu_KHLCNT" ColumnName="Số hiệu KHLCNT" />
                 <ScalarProperty Name="Thời_điểm_đăng_tải" ColumnName="Thời điểm đăng tải" />
-                <ScalarProperty Name="Tên_KHLCNT" ColumnName="Tên KHLCNT" />
                 <ScalarProperty Name="Lĩnh_vực" ColumnName="Lĩnh vực" />
                 <ScalarProperty Name="Bên_mời_thầu" ColumnName="Bên mời thầu" />
                 <ScalarProperty Name="Tên_gói_thầu" ColumnName="Tên gói thầu" />
@@ -118,9 +110,6 @@
                 <ScalarProperty Name="Phương_thức_LCNT" ColumnName="Phương thức LCNT" />
                 <ScalarProperty Name="Thời_gian_thực_hiện_hợp_đồng" ColumnName="Thời gian thực hiện hợp đồng" />
                 <ScalarProperty Name="Hình_thức_dự_thầu" ColumnName="Hình thức dự thầu" />
-                <ScalarProperty Name="Thời_gian_nhận_E_HSDT_từ_ngày" ColumnName="Thời gian nhận E-HSDT từ ngày" />
-                <ScalarProperty Name="Thời_gian_nhận_E_HSDT_đến_ngày" ColumnName="Thời gian nhận E-HSDT đến ngày" />
-                <ScalarProperty Name="Phát_hành_E_HSMT" ColumnName="Phát hành E-HSMT" />
                 <ScalarProperty Name="Thời_gian_hiệu_lực_của_E_HSDT" ColumnName="Thời gian hiệu lực của E-HSDT" />
                 <ScalarProperty Name="Địa_điểm_nhận_HSDT" ColumnName="Địa điểm nhận HSDT" />
                 <ScalarProperty Name="Địa_điểm_thực_hiện_gói_thầu" ColumnName="Địa điểm thực hiện gói thầu" />
@@ -129,7 +118,6 @@
                 <ScalarProperty Name="Dự_toán_gói_thầu" ColumnName="Dự toán gói thầu" />
                 <ScalarProperty Name="Số_tiền_bảo_đảm_dự_thầu" ColumnName="Số tiền bảo đảm dự thầu" />
                 <ScalarProperty Name="Hình_thức_bảo_đảm_dự_thầu" ColumnName="Hình thức bảo đảm dự thầu" />
-                <ScalarProperty Name="Làm_rõ_E_HSMT" ColumnName="Làm rõ E-HSMT" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

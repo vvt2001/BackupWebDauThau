@@ -130,11 +130,6 @@ namespace WebDauThauOnline.Models
         [Description("Hai giai đoạn hai túi hồ sơ")]
         Hai_giai_đoạn_hai_túi_hồ_sơ
     }
-    public enum Phát_hành_E_HSMT
-    {
-        [Description("Miễn phí")]
-        Miễn_phí
-    }
     public enum Hình_thức_bảo_đảm_dự_thầu
     {
         [Description("Thư bảo lãnh")]

@@ -91,7 +91,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.KetQuaLuaChonNhaThau_ThongTinChiTiet.Đính_kèm_thông_báo_kết_quả_LCNT, htmlAttributes: new { @class = "control-label col-md-3" })
         <div class="col-md-7">
-            @Html.TextBoxFor(model => model.EmpFileModel.fileUpload, "", new { @type = "file", @multiple = "multiple" })
+            @Html.TextBoxFor(model => model.EmpFileModel.fileUpload, "", new { @type = "file", @multiple = "multiple", @onchange = "checkSize(this)" })
             @Html.ValidationMessageFor(model => model.EmpFileModel.fileUpload, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -130,10 +130,10 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.KetQuaLuaChonNhaThau_ThongTinChiTiet.Văn_bản_phê_duyệt, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => model.KetQuaLuaChonNhaThau_ThongTinChiTiet.Số_quyết_định_phê_duyệt, htmlAttributes: new { @class = "control-label col-md-3" })
         <div class="col-md-7">
-            @Html.EditorFor(model => model.KetQuaLuaChonNhaThau_ThongTinChiTiet.Văn_bản_phê_duyệt, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.KetQuaLuaChonNhaThau_ThongTinChiTiet.Văn_bản_phê_duyệt, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.KetQuaLuaChonNhaThau_ThongTinChiTiet.Số_quyết_định_phê_duyệt, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.KetQuaLuaChonNhaThau_ThongTinChiTiet.Số_quyết_định_phê_duyệt, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -156,4 +156,12 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script>
+    function checkSize(input) {
+        if (input.files && input.files[0].size > (2 * 1024 * 1024 * 1024)) {
+            alert("File is too large.");
+            input.value = null;
+        }
+    }
+    </script>
 }

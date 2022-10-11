@@ -72,10 +72,10 @@
                 <ul class="nav navbar-nav">
                     @if (Session["ID"] != null)
                     {
-                        <li class="dropdown">
+                        <li class="dropdown" style="min-width:200px">
                             <a href="#">Welcome, @HttpContext.Current.Session["Username"].ToString()</a>
                             <div class="dropdown-content">
-                                @Html.ActionLink("Trang cá nhân", "Index", "MySubmission")
+                                @Html.ActionLink("Thông tin đăng tải cá nhân", "Index", "MySubmission")
                                 @Html.ActionLink("Đổi mật khẩu", "ChangePassword", "Accounts",new { id = Session["ID"]},null)
                                 @Html.ActionLink("Đăng xuất", "Logout", "Accounts")
                             </div>

@@ -60,15 +60,6 @@
         </tr>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ThongBaoMoiThauModel.Tên_KHLCNT)
-            </th>
-
-            <td>
-                @Html.DisplayFor(model => model.ThongBaoMoiThauModel.Tên_KHLCNT)
-            </td>
-        </tr>
-        <tr>
-            <th>
                 @Html.DisplayNameFor(model => model.ThongBaoMoiThauModel.Lĩnh_vực)
             </th>
 
@@ -171,29 +162,11 @@
         </tr>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ThongBaoMoiThauModel.Thời_gian_nhận_E_HSDT_từ_ngày)
+                @Html.DisplayNameFor(model => model.ThongBaoMoiThauModel.Chi_phí_E_HSMT)
             </th>
 
             <td>
-                @Html.DisplayFor(model => model.ThongBaoMoiThauModel.Thời_gian_nhận_E_HSDT_từ_ngày)
-            </td>
-        </tr>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ThongBaoMoiThauModel.Thời_gian_nhận_E_HSDT_đến_ngày)
-            </th>
-
-            <td>
-                @Html.DisplayFor(model => model.ThongBaoMoiThauModel.Thời_gian_nhận_E_HSDT_đến_ngày)
-            </td>
-        </tr>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ThongBaoMoiThauModel.Phát_hành_E_HSMT)
-            </th>
-
-            <td>
-                @Html.DisplayFor(model => model.ThongBaoMoiThauModel.Phát_hành_E_HSMT)
+                @Html.DisplayFor(model => model.ThongBaoMoiThauModel.Chi_phí_E_HSMT)
             </td>
         </tr>
         <tr>
@@ -284,15 +257,6 @@
                     @Html.ActionLink(item.Name, "DownLoadFile", new { id = item.ID })
                     <br />
                 }
-            </td>
-        </tr>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ThongBaoMoiThauModel.Làm_rõ_E_HSMT)
-            </th>
-
-            <td>
-                @Html.DisplayFor(model => model.ThongBaoMoiThauModel.Làm_rõ_E_HSMT)
             </td>
         </tr>
     </table>

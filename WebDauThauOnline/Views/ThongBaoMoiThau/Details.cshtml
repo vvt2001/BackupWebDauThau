@@ -92,15 +92,7 @@
                     @Html.DisplayFor(model => model.ThongBaoMoiThauModel.Số_hiệu_KHLCNT)
                 </td>
             </tr>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.ThongBaoMoiThauModel.Tên_KHLCNT)
-                </th>
 
-                <td>
-                    @Html.DisplayFor(model => model.ThongBaoMoiThauModel.Tên_KHLCNT)
-                </td>
-            </tr>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.ThongBaoMoiThauModel.Lĩnh_vực)
@@ -203,38 +195,16 @@
                     @Html.DisplayFor(model => model.ThongBaoMoiThauModel.Hình_thức_dự_thầu)
                 </td>
             </tr>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.ThongBaoMoiThauModel.Thời_gian_nhận_E_HSDT_từ_ngày)
-                </th>
-
-                <td>
-                    @if(Model.ThongBaoMoiThauModel.Thời_gian_nhận_E_HSDT_từ_ngày != null)
-                    {
-                        @Model.ThongBaoMoiThauModel.Thời_gian_nhận_E_HSDT_từ_ngày.Value.ToString("dd/MM/yyyy hh:mm tt")
-                    }
-                </td>
-                <th style="width:150px">
-                    Đến ngày
-                </th>
-
-                <td>
-                    @if (Model.ThongBaoMoiThauModel.Thời_gian_nhận_E_HSDT_đến_ngày != null)
-                    {
-                        @Model.ThongBaoMoiThauModel.Thời_gian_nhận_E_HSDT_đến_ngày.Value.ToString("dd/MM/yyyy hh:mm tt")
-                    }
-                </td>
-            </tr>
             @*        <tr>
 
                 </tr>*@
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.ThongBaoMoiThauModel.Phát_hành_E_HSMT)
+                    @Html.DisplayNameFor(model => model.ThongBaoMoiThauModel.Chi_phí_E_HSMT)
                 </th>
 
                 <td colspan="3">
-                    @Html.DisplayFor(model => model.ThongBaoMoiThauModel.Phát_hành_E_HSMT)
+                    @Html.DisplayFor(model => model.ThongBaoMoiThauModel.Chi_phí_E_HSMT)
                 </td>
             </tr>
             <tr>
@@ -328,15 +298,6 @@
                         @Html.ActionLink(item.Name, "DownLoadFile", new { id = item.ID })
                         <br />
                     }
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.ThongBaoMoiThauModel.Làm_rõ_E_HSMT)
-                </th>
-
-                <td>
-                    @Html.DisplayFor(model => model.ThongBaoMoiThauModel.Làm_rõ_E_HSMT)
                 </td>
             </tr>
         </table>

@@ -58,8 +58,8 @@ namespace WebDauThauOnline.Models
         [DisplayName("Thời gian nhận E-HSDT đến ngày")]
         [DataType(DataType.DateTime)]
         public Nullable<System.DateTime> Thời_gian_nhận_E_HSDT_đến_ngày { get; set; }
-        [DisplayName("Phát hành E-HSMT")]
-        public string Phát_hành_E_HSMT { get; set; }
+        [DisplayName("Chi phí E-HSMT")]
+        public Nullable<long> Chi_phí_E_HSMT { get; set; }
         [DisplayName("Thời gian hiệu lực của E-HSDT (ngày)")]
         public Nullable<int> Thời_gian_hiệu_lực_của_E_HSDT { get; set; }
         [DisplayName("Địa điểm nhận HSDT")]
@@ -96,7 +96,6 @@ namespace WebDauThauOnline.Models
         public Hình_thức_lựa_chọn_nhà_thầu Hình_thức_lựa_chọn_nhà_thầu_EnumValue { get; set; }
         public Phương_thức_LCNT Phương_thức_LCNT_EnumValue { get; set; }
         public Hình_thức_dự_thầu Hình_thức_dự_thầu_EnumValue { get; set; }
-        public Phát_hành_E_HSMT Phát_hành_E_HSMT_EnumValue { get; set; }
         public Hình_thức_bảo_đảm_dự_thầu Hình_thức_bảo_đảm_dự_thầu_EnumValue { get; set; }
     }
 
