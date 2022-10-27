@@ -1,5 +1,5 @@
 ﻿@model WebDauThauOnline.Models.SearchViewModel
-@using WebDauThauOnline.Models;
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Trang chủ";
@@ -34,7 +34,7 @@
 
                 @Html.EditorFor(model => model.searchModel.Bên_mời_thầu, new { htmlAttributes = new { Class = "form-control col-md-3", @placeholder = "Bên mời thầu", @style = "margin: auto; width: 260px" } })
 
-                @Html.DropDownListFor(model => model.searchModel.Phạm_vi, ViewBag.Phạm_vi_EnumList as SelectList, "Phạm vi", new { Class = "form-control col-md-3", @style = "margin: auto; width: 280px" })
+                @Html.DropDownListFor(model => model.searchModel.Phạm_vi, ViewBag.Phạm_vi_EnumList as SelectList, "-Phạm vi-", new { Class = "form-control col-md-3", @style = "margin: auto; width: 280px" })
             </div>
             <div class="row">
                 @Html.DropDownListFor(model => model.searchModel.Loại_ngày, ViewBag.Loại_ngày_EnumList as SelectList, new { Class = "form-control col-md-2", @style = "margin: auto; width: 220px" })
@@ -45,9 +45,9 @@
 
                 @Html.EditorFor(model => model.searchModel.Đến_ngày, new { htmlAttributes = new { Class = "form-control col-md-2", @placeholder = "Đến ngày", onfocus = "(this.type='date')", id = "Đến_ngày", @style = "margin: auto; width: 130px" } })
 
-                @Html.DropDownListFor(model => model.searchModel.Hình_thức, ViewBag.Hình_thức_EnumList as SelectList, "Hình thức", new { Class = "form-control col-md-2", @style = "margin: auto; width: 160px" })
+                @Html.DropDownListFor(model => model.searchModel.Hình_thức, ViewBag.Hình_thức_EnumList as SelectList, "-Hình thức-", new { Class = "form-control col-md-2", @style = "margin: auto; width: 160px" })
 
-                @Html.DropDownListFor(model => model.searchModel.Lĩnh_vực, ViewBag.Lĩnh_vực_EnumList as SelectList, "Lĩnh vực", new { Class = "form-control col-md-1", @style = "margin: auto; width: 120px" })
+                @Html.DropDownListFor(model => model.searchModel.Lĩnh_vực, ViewBag.Lĩnh_vực_EnumList as SelectList, "-Lĩnh vực-", new { Class = "form-control col-md-1", @style = "margin: auto; width: 120px" })
 
                 <input type="submit" value="Tìm" class="btn btn-primary col-md-1" style="margin:auto; display:block; width:50px" />
             </div>
@@ -167,7 +167,20 @@
     </div>
 }
 
-
+@if (!ViewBag.IsEmpty)
+{
+    <br />
+    if (ViewBag.filter == "ThongBaoMoiThau")
+    {
+        @Html.PagedListPager(Model.thongBaoMoiThauModel, page => Url.Action("GetList",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    }
+    if (ViewBag.filter == "KetQuaLuaChonNhaThau")
+    {
+        @Html.PagedListPager(Model.ketQuaLuaChonNhaThauModel, page => Url.Action("GetList",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    }
+}
 
 
 @*<table class="table">

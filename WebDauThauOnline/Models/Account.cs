@@ -29,5 +29,7 @@ namespace WebDauThauOnline.Models
         public string confirmPassword { get; set; }
         public string registerErrorMessage { get; set; }
         public string loginErrorMessage { get; set; }
+        public int Admin { get; set; }
+
     }
 }

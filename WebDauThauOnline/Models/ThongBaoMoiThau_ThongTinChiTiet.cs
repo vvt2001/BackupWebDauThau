@@ -85,8 +85,8 @@ namespace WebDauThauOnline.Models
         [DataType(DataType.DateTime)]
         public Nullable<System.DateTime> Thời_điểm_đăng_tải { get; set; }
         public Nullable<int> Lần_chỉnh_sửa { get; set; }
-        public Nullable<long> AccountID { get; set; }
-
+        public int AccountID { get; set; }
+        public Nullable<int> BenMoiThauID { get; set; }
 
 
         public Loại_thông_báo Loại_thông_báo_EnumValue { get; set; }

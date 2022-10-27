@@ -11,8 +11,8 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Thông báo ID" Type="bigint" />
-          <Property Name="Kết quả ID" Type="bigint" />
+          <Property Name="Thông báo ID" Type="int" />
+          <Property Name="Kết quả ID" Type="int" />
           <Property Name="Path" Type="nvarchar(max)" Nullable="false" />
           <Property Name="FileSize" Type="int" Nullable="false" />
           <Property Name="Hashed Content" Type="varbinary(max)" Nullable="false" />
@@ -25,22 +25,22 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FileModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FileEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Files" EntityType="FileModel.File" />
+        </EntityContainer>
         <EntityType Name="File">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Thông_báo_ID" Type="Int32" />
+          <Property Name="Kết_quả_ID" Type="Int32" />
+          <Property Name="Path" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FileSize" Type="Int32" Nullable="false" />
-          <Property Name="Hashed_Content" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Hashed_Content" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="Content" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="Thông_báo_ID" Type="Int64" />
-          <Property Name="Kết_quả_ID" Type="Int64" />
         </EntityType>
-        <EntityContainer Name="FileEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Files" EntityType="Self.File" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -50,14 +50,14 @@
           <EntitySetMapping Name="Files">
             <EntityTypeMapping TypeName="FileModel.File">
               <MappingFragment StoreEntitySet="File">
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Hashed_Content" ColumnName="Hashed Content" />
+                <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
                 <ScalarProperty Name="Kết_quả_ID" ColumnName="Kết quả ID" />
                 <ScalarProperty Name="Thông_báo_ID" ColumnName="Thông báo ID" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Path" ColumnName="Path" />
-                <ScalarProperty Name="FileSize" ColumnName="FileSize" />
-                <ScalarProperty Name="Hashed_Content" ColumnName="Hashed Content" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

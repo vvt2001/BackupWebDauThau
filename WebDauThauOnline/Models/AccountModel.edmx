@@ -14,6 +14,7 @@
           <Property Name="HashedPassword" Type="varbinary(max)" Nullable="false" />
           <Property Name="Key" Type="varbinary(max)" Nullable="false" />
           <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Admin" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="AccountModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
@@ -31,6 +32,7 @@
           <Property Name="HashedPassword" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="Key" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Admin" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityContainer Name="AccountEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
@@ -44,6 +46,7 @@
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="AccountModel.Account">
               <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="Admin" ColumnName="Admin" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Username" ColumnName="Username" />

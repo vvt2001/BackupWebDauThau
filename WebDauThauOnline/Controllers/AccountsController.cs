@@ -74,7 +74,7 @@ namespace WebDauThauOnline.Controllers
 
                     account.HashedPassword = MD5Hashing(connectedByte);
                     account.Key = key;
-
+                    account.Admin = 0;
                     if (ModelState.IsValid)
                     {
                         db.Accounts.Add(account);
@@ -125,7 +125,10 @@ namespace WebDauThauOnline.Controllers
                 {
                     Session["ID"] = accountDetail.ID;
                     Session["Username"] = accountDetail.Username;
-                    HttpCookie Usercookie = new HttpCookie("ID", Session["ID"].ToString());
+                    Session["Admin"] = accountDetail.Admin;
+                    Session.Timeout = 10000;
+/*                    HttpCookie Usercookie = new HttpCookie("cookie", "random");
+                    Usercookie.Expires = DateTime.Now.AddDays(365);*/
                     return RedirectToAction("Index", "Home");
                 }
                 else

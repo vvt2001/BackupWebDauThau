@@ -54,7 +54,7 @@
                 </button>
                 @Html.ActionLink("Web Lưu Trữ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse" style="float:left">
+            <div class="navbar-collapse collapse" style="float:left;min-width:200px">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Trang chủ", "Index", "Home")</li>
                     <li>@Html.ActionLink("Giới thiệu", "About", "Home")</li>
@@ -65,6 +65,20 @@
                             @Html.ActionLink("Đăng tải kết quả", "GetList", "ThongBaoMoiThau")
                         </div>
                     </li>
+                    <li class="dropdown">
+                        <a href="#">Đăng ký</a>
+                        <div class="dropdown-content">
+                            @Html.ActionLink("Nhà thầu", "Create", "NhaThauDaDuyets")
+                            @Html.ActionLink("Bên mời thầu", "Create", "BenMoiThauDaDuyets")
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">Cơ sở dữ liệu</a>
+                        <div class="dropdown-content" style="width: 300px">
+                            @Html.ActionLink("Danh sách nhà thầu được phê duyệt", "GetList", "NhaThauDaDuyets")
+                            @Html.ActionLink("Danh sách bên mời thầu được phê duyệt", "GetList", "BenMoiThauDaDuyets")
+                        </div>
+                    </li>
                 </ul>
             </div>
 
@@ -72,11 +86,21 @@
                 <ul class="nav navbar-nav">
                     @if (Session["ID"] != null)
                     {
-                        <li class="dropdown" style="min-width:200px">
+                        if (Session["Admin"].ToString() == "1")
+                        {
+                            <li class="dropdown">
+                                <a href="#">Phê duyệt</a>
+                                <div class="dropdown-content" style="width:200px">
+                                    @Html.ActionLink("Nhà thầu", "ApproveRequest", "NhaThauDaDuyets")
+                                    @Html.ActionLink("Bên mời thầu", "ApproveRequest", "BenMoiThauDaDuyets")
+                                </div>
+                            </li>
+                        }
+                        <li class="dropdown">
                             <a href="#">Welcome, @HttpContext.Current.Session["Username"].ToString()</a>
-                            <div class="dropdown-content">
+                            <div class="dropdown-content" style="width:200px">
                                 @Html.ActionLink("Thông tin đăng tải cá nhân", "Index", "MySubmission")
-                                @Html.ActionLink("Đổi mật khẩu", "ChangePassword", "Accounts",new { id = Session["ID"]},null)
+                                @Html.ActionLink("Đổi mật khẩu", "ChangePassword", "Accounts", new { id = Session["ID"] }, null)
                                 @Html.ActionLink("Đăng xuất", "Logout", "Accounts")
                             </div>
                         </li>

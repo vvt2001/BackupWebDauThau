@@ -11,6 +11,7 @@ using System.Web;
 using System.IO;
 using System.Security.Cryptography;
 using System.Collections.Generic;
+using PagedList;
 
 namespace WebDauThauOnline.Controllers
 {
@@ -857,7 +858,7 @@ namespace WebDauThauOnline.Controllers
             return View(db.ThongBaoMoiThau_ThongTinChiTiet.ToList());
         }*/
 
-        public ActionResult GetList()
+        public ActionResult GetList(int? page)
         {
             var Kiểu_thông_báo_EnumData = from Kiểu_thông_báo e in Enum.GetValues(typeof(Kiểu_thông_báo))
                                           select new
@@ -902,13 +903,15 @@ namespace WebDauThauOnline.Controllers
             ViewBag.Hình_thức_EnumList = new SelectList(Hình_thức_EnumData, "ID", "Name");
             ViewBag.Lĩnh_vực_EnumList = new SelectList(Lĩnh_vực_EnumData, "ID", "Name");
 
-            searchViewModel.thongBaoMoiThauModel = db.ThongBaoMoiThau_ThongTinChiTiet.AsEnumerable().ToList();
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            searchViewModel.thongBaoMoiThauModel = db.ThongBaoMoiThau_ThongTinChiTiet.AsEnumerable().OrderBy(x => x.ID).ToPagedList(pageNumber, pageSize);
 
             return View(searchViewModel);
         }
 
         [HttpPost]
-        public ActionResult GetList(SearchViewModel searchViewModel)
+        public ActionResult GetList(SearchViewModel searchViewModel, int? page)
         {
             var Kiểu_thông_báo_EnumData = from Kiểu_thông_báo e in Enum.GetValues(typeof(Kiểu_thông_báo))
                                           select new
@@ -1002,7 +1005,9 @@ namespace WebDauThauOnline.Controllers
 
                 if (result.Any())
                 {
-                    this.searchViewModel.thongBaoMoiThauModel = result;
+                    int pageSize = 10;
+                    int pageNumber = (page ?? 1);
+                    this.searchViewModel.thongBaoMoiThauModel = result.OrderBy(x => x.ID).ToPagedList(pageNumber, pageSize); ;
                 }
                 return View("GetList", this.searchViewModel);
         }

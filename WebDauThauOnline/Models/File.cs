@@ -11,16 +11,16 @@ namespace WebDauThauOnline.Models
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class File
     {
         public int ID { get; set; }
         public string Name { get; set; }
+        public Nullable<int> Thông_báo_ID { get; set; }
+        public Nullable<int> Kết_quả_ID { get; set; }
         public string Path { get; set; }
         public int FileSize { get; set; }
         public byte[] Hashed_Content { get; set; }
         public byte[] Content { get; set; }
-        public Nullable<long> Thông_báo_ID { get; set; }
-        public Nullable<long> Kết_quả_ID { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿@model WebDauThauOnline.Models.SearchViewModel
-@using WebDauThauOnline.Models;
+@using PagedList.Mvc;
+
 
 @{
     ViewBag.Title = "Trang cá nhân";
@@ -172,6 +173,20 @@
     </div>
 }
 
+@if (!ViewBag.IsEmpty)
+{
+    <br />
+    if (ViewBag.filter == "ThongBaoMoiThau")
+    {
+        @Html.PagedListPager(Model.thongBaoMoiThauModel, page => Url.Action("GetList",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    }
+    if (ViewBag.filter == "KetQuaLuaChonNhaThau")
+    {
+        @Html.PagedListPager(Model.ketQuaLuaChonNhaThauModel, page => Url.Action("GetList",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    }
+}
 
 
 

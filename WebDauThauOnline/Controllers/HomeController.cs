@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -38,7 +39,7 @@ namespace WebDauThauOnline.Controllers
             }
             return Json(timeInterval, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Index(string filter)
+        public ActionResult Index(string filter, int? page)
         {
             var Kiểu_thông_tin_EnumData = from Kiểu_thông_tin e in Enum.GetValues(typeof(Kiểu_thông_tin))
                                           select new
@@ -83,35 +84,31 @@ namespace WebDauThauOnline.Controllers
             ViewBag.Hình_thức_EnumList = new SelectList(Hình_thức_EnumData, "ID", "Name");
             ViewBag.Lĩnh_vực_EnumList = new SelectList(Lĩnh_vực_EnumData, "ID", "Name");
 
-            if(HttpContext.Request.Cookies["ID"] != null)
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            string currentFilter = (filter ?? "ThongBaoMoiThau");
+
+            ViewBag.filter = currentFilter;
+
+            if (HttpContext.Request.Cookies["ID"] != null)
             {
                 Session["ID"] = HttpContext.Request.Cookies["ID"];
             }
 
-            if (filter == "KetQuaLuaChonNhaThau")
+            if (currentFilter == "KetQuaLuaChonNhaThau")
             {
-                searchViewModel.ketQuaLuaChonNhaThauModel = db2.KetQuaLuaChonNhaThau_ThongTinChiTiet.ToList();
+                searchViewModel.ketQuaLuaChonNhaThauModel = db2.KetQuaLuaChonNhaThau_ThongTinChiTiet.OrderBy(x => x.ID).ToPagedList(pageNumber, pageSize);
                 ViewBag.IsEmpty = false;
                 if(searchViewModel.ketQuaLuaChonNhaThauModel.Count() == 0)
                 {
                     ViewBag.IsEmpty = true;
                 }
             }
-            else if (filter == "ThongBaoMoiThau")
+            else if (currentFilter == "ThongBaoMoiThau")
             {
-                searchViewModel.thongBaoMoiThauModel = db1.ThongBaoMoiThau_ThongTinChiTiet.ToList();
+                searchViewModel.thongBaoMoiThauModel = db1.ThongBaoMoiThau_ThongTinChiTiet.OrderBy(x => x.ID).ToPagedList(pageNumber, pageSize);
                 ViewBag.IsEmpty = false;
                 if (searchViewModel.thongBaoMoiThauModel.Count() == 0)
-                {
-                    ViewBag.IsEmpty = true;
-                }
-            }
-            else
-            {
-                searchViewModel.ketQuaLuaChonNhaThauModel = db2.KetQuaLuaChonNhaThau_ThongTinChiTiet.ToList();
-                searchViewModel.thongBaoMoiThauModel = db1.ThongBaoMoiThau_ThongTinChiTiet.ToList();
-                ViewBag.IsEmpty = false;
-                if (searchViewModel.ketQuaLuaChonNhaThauModel.Count() == 0 && searchViewModel.thongBaoMoiThauModel.Count() == 0)
                 {
                     ViewBag.IsEmpty = true;
                 }
@@ -129,7 +126,7 @@ namespace WebDauThauOnline.Controllers
                         return Json(new { Message = message, JsonRequestBehavior.AllowGet });*//*
         }*/
 
-        public ActionResult SearchResult()
+        public ActionResult SearchResult(int? page)
         {
             var Kiểu_thông_tin_EnumData = from Kiểu_thông_tin e in Enum.GetValues(typeof(Kiểu_thông_tin))
                                           select new
@@ -174,14 +171,16 @@ namespace WebDauThauOnline.Controllers
             ViewBag.Hình_thức_EnumList = new SelectList(Hình_thức_EnumData, "ID", "Name");
             ViewBag.Lĩnh_vực_EnumList = new SelectList(Lĩnh_vực_EnumData, "ID", "Name");
 
-            searchViewModel.thongBaoMoiThauModel = db1.ThongBaoMoiThau_ThongTinChiTiet.AsEnumerable().ToList();
-            searchViewModel.ketQuaLuaChonNhaThauModel = db2.KetQuaLuaChonNhaThau_ThongTinChiTiet.AsEnumerable().ToList();
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            searchViewModel.thongBaoMoiThauModel = db1.ThongBaoMoiThau_ThongTinChiTiet.AsEnumerable().OrderBy(x => x.ID).ToPagedList(pageNumber, pageSize);
+            searchViewModel.ketQuaLuaChonNhaThauModel = db2.KetQuaLuaChonNhaThau_ThongTinChiTiet.AsEnumerable().OrderBy(x => x.ID).ToPagedList(pageNumber, pageSize);
 
             return View(searchViewModel);
         }
 
         [HttpPost]
-        public ActionResult SearchResult(SearchViewModel searchViewModel)
+        public ActionResult SearchResult(SearchViewModel searchViewModel, int? page)
         {
             var Kiểu_thông_tin_EnumData = from Kiểu_thông_tin e in Enum.GetValues(typeof(Kiểu_thông_tin))
                                           select new
@@ -231,6 +230,7 @@ namespace WebDauThauOnline.Controllers
                 var searchModel = searchViewModel.searchModel;
                 if (searchModel.Kiểu_thông_tin == Kiểu_thông_tin.Thông_báo_mời_thầu)
                 {
+                    ViewBag.filter = "ThongBaoMoiThau";
                     var result = db1.ThongBaoMoiThau_ThongTinChiTiet.AsEnumerable();
 
                     if (searchModel.Số_TBMT_Tên_gói_thầu != null)
@@ -274,13 +274,16 @@ namespace WebDauThauOnline.Controllers
                         result = result.Where(x => x.Lĩnh_vực.Contains(searchModel.Lĩnh_vực.ToDescriptionString()));
 
                     if (result.Any()) {
-                        this.searchViewModel.thongBaoMoiThauModel = result;
+                        int pageSize = 10;
+                        int pageNumber = (page ?? 1);
+                        this.searchViewModel.thongBaoMoiThauModel = result.OrderBy(x => x.ID).ToPagedList(pageNumber, pageSize); ;
                     }
                     return View("SearchResult", this.searchViewModel);
                 }
 
                 if (searchModel.Kiểu_thông_tin == Kiểu_thông_tin.Kết_quả_lựa_chọn_nhà_thầu)
                 {
+                    ViewBag.filter = "KetQuaLuaChonNhaThau";
                     var result = db2.KetQuaLuaChonNhaThau_ThongTinChiTiet.AsEnumerable();
 
                     if (searchModel.Số_TBMT_Tên_gói_thầu != null)
@@ -315,7 +318,9 @@ namespace WebDauThauOnline.Controllers
                     }
                     if (result.Any())
                     {
-                        this.searchViewModel.ketQuaLuaChonNhaThauModel = result;
+                        int pageSize = 10;
+                        int pageNumber = (page ?? 1);
+                        this.searchViewModel.ketQuaLuaChonNhaThauModel = result.OrderBy(x => x.ID).ToPagedList(pageNumber, pageSize);
                     }
                     return View("SearchResult", this.searchViewModel);
                 }

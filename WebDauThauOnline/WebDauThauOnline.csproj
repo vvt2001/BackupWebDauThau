@@ -55,6 +55,12 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -127,9 +133,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\BenMoiThauDaDuyetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KetQuaLuaChonNhaThauController.cs" />
     <Compile Include="Controllers\MySubmissionController.cs" />
+    <Compile Include="Controllers\NhaThauDaDuyetsController.cs" />
     <Compile Include="Controllers\ThongBaoMoiThauController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -152,6 +160,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AccountModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\BenMoiThauDaDuyet.cs">
+      <DependentUpon>BenMoiThauDaDuyetModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BenMoiThauDaDuyetModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BenMoiThauDaDuyetModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BenMoiThauDaDuyetModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BenMoiThauDaDuyetModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BenMoiThauDaDuyetModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BenMoiThauDaDuyetModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BenMoiThauSearchModel.cs" />
+    <Compile Include="Models\BenMoiThauSearchViewModel.cs" />
     <Compile Include="Models\EmpFileModel.cs" />
     <Compile Include="Models\EnumExtension.cs" />
     <Compile Include="Models\File.cs">
@@ -191,6 +219,26 @@
     <Compile Include="Models\KetQuaLuaChonNhaThau_ThongTinChiTiet.cs">
       <DependentUpon>KetQuaLuaChonNhaThauModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\NhaThauDaDuyet.cs">
+      <DependentUpon>NhaThauDaDuyetModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NhaThauDaDuyetModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NhaThauDaDuyetModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NhaThauDaDuyetModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NhaThauDaDuyetModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NhaThauDaDuyetModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NhaThauDaDuyetModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NhaThauSearchModel.cs" />
+    <Compile Include="Models\NhaThauSearchViewModel.cs" />
     <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Models\ThongBaoMoiThauModel.Context.cs">
@@ -219,6 +267,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\SearchBar.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -233,6 +282,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>AccountModel.edmx</DependentUpon>
       <LastGenOutput>AccountModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\BenMoiThauDaDuyetModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BenMoiThauDaDuyetModel.edmx</DependentUpon>
+      <LastGenOutput>BenMoiThauDaDuyetModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\BenMoiThauDaDuyetModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BenMoiThauDaDuyetModel.edmx</DependentUpon>
+      <LastGenOutput>BenMoiThauDaDuyetModel.cs</LastGenOutput>
     </Content>
     <Content Include="Models\FileModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -254,6 +313,16 @@
       <DependentUpon>KetQuaLuaChonNhaThauModel.edmx</DependentUpon>
       <LastGenOutput>KetQuaLuaChonNhaThauModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\NhaThauDaDuyetModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NhaThauDaDuyetModel.edmx</DependentUpon>
+      <LastGenOutput>NhaThauDaDuyetModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\NhaThauDaDuyetModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NhaThauDaDuyetModel.edmx</DependentUpon>
+      <LastGenOutput>NhaThauDaDuyetModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\ThongBaoMoiThauModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ThongBaoMoiThauModel.Context.cs</LastGenOutput>
@@ -273,13 +342,6 @@
     <Content Include="Models\ThongBaoMoiThauModel.edmx.diagram">
       <DependentUpon>ThongBaoMoiThauModel.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="Models\KetQuaLuaChonNhaThauModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>KetQuaLuaChonNhaThauModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\KetQuaLuaChonNhaThauModel.edmx.diagram">
-      <DependentUpon>KetQuaLuaChonNhaThauModel.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="Models\FileModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>FileModel.Designer.cs</LastGenOutput>
@@ -293,6 +355,27 @@
     </EntityDeploy>
     <Content Include="Models\AccountModel.edmx.diagram">
       <DependentUpon>AccountModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\NhaThauDaDuyetModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NhaThauDaDuyetModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\NhaThauDaDuyetModel.edmx.diagram">
+      <DependentUpon>NhaThauDaDuyetModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\KetQuaLuaChonNhaThauModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>KetQuaLuaChonNhaThauModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\KetQuaLuaChonNhaThauModel.edmx.diagram">
+      <DependentUpon>KetQuaLuaChonNhaThauModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\BenMoiThauDaDuyetModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BenMoiThauDaDuyetModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\BenMoiThauDaDuyetModel.edmx.diagram">
+      <DependentUpon>BenMoiThauDaDuyetModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -333,6 +416,16 @@
     <Content Include="Views\Accounts\Register.cshtml" />
     <Content Include="Views\Accounts\Index.cshtml" />
     <Content Include="Views\Accounts\ChangePassword.cshtml" />
+    <Content Include="Views\NhaThauDaDuyets\GetList.cshtml" />
+    <Content Include="Views\NhaThauDaDuyets\Details.cshtml" />
+    <Content Include="Views\BenMoiThauDaDuyets\Details.cshtml" />
+    <Content Include="Views\BenMoiThauDaDuyets\GetList.cshtml" />
+    <Content Include="Views\NhaThauDaDuyets\Create.cshtml" />
+    <Content Include="Views\NhaThauDaDuyets\ApproveRequest.cshtml" />
+    <Content Include="Views\NhaThauDaDuyets\ConfirmApprove.cshtml" />
+    <Content Include="Views\BenMoiThauDaDuyets\Create.cshtml" />
+    <Content Include="Views\BenMoiThauDaDuyets\ApproveRequest.cshtml" />
+    <Content Include="Views\BenMoiThauDaDuyets\ConfirmApprove.cshtml" />
     <None Include="Web.FolderProfile.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
